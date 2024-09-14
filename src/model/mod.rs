@@ -16,6 +16,7 @@ pub mod users;
 use crate::error;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_with::skip_serializing_none;
+use std::sync::OnceLock;
 
 pub trait BodyBounds: Serialize {}
 impl<B: Serialize> BodyBounds for B {}
@@ -67,8 +68,11 @@ pub enum Domain {
 
 impl AsRef<str> for Domain {
     fn as_ref(&self) -> &str {
+        static LICHESS_URL: OnceLock<String> = OnceLock::new();
+
         match self {
-            Domain::Lichess => "lichess.org",
+            Domain::Lichess => LICHESS_URL
+                .get_or_init(|| std::env::var("LICHESS_URL").unwrap_or("lichess.org".to_string())),
             Domain::Tablebase => "tablebase.lichess.ovh",
             Domain::Engine => "engine.lichess.ovh",
             Domain::Explorer => "explorer.lichess.ovh",
