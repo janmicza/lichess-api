@@ -27,6 +27,8 @@ serde_urlencoded = "0.7.1"
 thiserror = "1.0.63"
 tracing = "0.1.40"
 url = "2.5.2"
+# mock dependencies
+regex = "1.10.6"
 
 [dev-dependencies]
 clap = { version = "4.5.17", features = ["derive"] }
