@@ -1,1 +1,1 @@
-pub mod client_mockito;
+pub mod client_mock;
