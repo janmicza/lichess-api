@@ -34,9 +34,7 @@ impl LichessApi<Mock> {
         match game_id.to_lowercase().as_str() {
             "0j36wf0d" => Ok(GAME_0J36WF0D.clone()),
             "qapyipom" => Ok(GAME_QAPYIPOM.clone()),
-            _ => Err(Error::Response(
-                "supported games are only: 0j36wf0d, qapyipom".to_string(),
-            )),
+            _ => Err(Error::PageNotFound()),
         }
     }
 
